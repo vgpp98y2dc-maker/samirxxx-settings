@@ -3,40 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <title>Samirxxx Settings</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <header class="top">
+  <!-- LOGIN -->
+  <div class="login-container" id="loginBox">
     <h1>SAMIRXXX</h1>
-  </header>
+    <p>Settings Panel</p>
 
-  <main class="hero">
-    <h2>SAMIRXXX SETTINGS</h2>
-    <p>Configuraciones optimizadas creadas por Samirxxx</p>
-    <a href="#settings" class="btn">VER SETTINGS</a>
-  </main>
+    <input type="text" id="user" placeholder="Usuario">
+    <input type="password" id="pass" placeholder="Contraseña">
 
-  <section id="settings" class="settings">
-    <div class="box">
-      <h3>SENSIBILIDAD</h3>
-      <p>Ajustes precisos para máximo control</p>
-    </div>
+    <button onclick="login()">Entrar</button>
+    <p class="error" id="error"></p>
+  </div>
 
-    <div class="box">
-      <h3>GRÁFICOS</h3>
-      <p>Mejor rendimiento y más FPS</p>
-    </div>
+  <!-- CONTENIDO PRINCIPAL (OCULTO) -->
+  <div class="content" id="content" style="display:none;">
+    <h1>Bienvenido, Samirxxx</h1>
+    <p>Created by Samirxxx</p>
+  </div>
 
-    <div class="box">
-      <h3>HUD</h3>
-      <p>Interfaz limpia y competitiva</p>
-    </div>
-  </section>
+  <script>
+    function login() {
+      const user = document.getElementById("user").value;
+      const pass = document.getElementById("pass").value;
+      const error = document.getElementById("error");
 
-  <footer>
-    <p>© 2026 — Creado por <strong>Samirxxx</strong></p>
-  </footer>
+      if (user === "samirxxx" && pass === "1234") {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("content").style.display = "block";
+      } else {
+        error.textContent = "Usuario o contraseña incorrectos";
+      }
+    }
+  </script>
 
 </body>
 </html>
