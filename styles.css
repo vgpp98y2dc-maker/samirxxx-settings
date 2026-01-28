@@ -3,6 +3,60 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Segoe UI', sans-serif;
+}/* ===== ANIMACIONES FORZADAS ===== */
+
+/* LOGIN ENTRA DESDE ABAJO */
+.login-container {
+  animation: loginForce 1s ease-out !important;
+}
+
+@keyframes loginForce {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -30%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* HERO ENTRA */
+.hero {
+  animation: heroForce 1s ease-out !important;
+}
+
+@keyframes heroForce {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* CARDS ENTRA */
+.card {
+  animation: cardForce 0.8s ease-out !important;
+}
+
+@keyframes cardForce {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* HOVER MUY NOTORIO */
+.card:hover {
+  transform: translateY(-12px) scale(1.08) !important;
+  box-shadow: 0 15px 40px rgba(255,255,255,0.25) !important;
 }
 
 body {
