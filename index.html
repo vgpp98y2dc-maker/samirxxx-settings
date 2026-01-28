@@ -1,46 +1,105 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Samirxxx Settings</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SAMIRXXX - Settings Panel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0a001f, #1a0033, #000);
+      color: #e0e0ff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .container {
+      text-align: center;
+      background: rgba(10, 5, 30, 0.7);
+      padding: 50px 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(255, 215, 0, 0.3); /* oro azteca */
+      max-width: 500px;
+      border: 2px solid #ffd70055;
+      backdrop-filter: blur(10px);
+    }
+    h1 {
+      font-size: 4.5rem;
+      color: #ffd700; /* oro */
+      text-shadow: 0 0 30px #ffd700;
+      margin-bottom: 10px;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow { from { text-shadow: 0 0 20px #ffd700; } to { text-shadow: 0 0 40px #ff4500; } }
+    h2 { color: #ff4500; font-size: 2rem; margin: 10px 0; }
+    p { margin: 20px 0; font-size: 1.2rem; }
+    .lang { margin: 20px 0; }
+    .lang a { color: #00ffff; margin: 0 15px; text-decoration: none; font-weight: bold; }
+    .lang a:hover { color: #ffd700; }
+    .btn {
+      display: inline-block;
+      background: linear-gradient(45deg, #ffd700, #ff4500);
+      color: black;
+      padding: 15px 50px;
+      margin: 15px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.3rem;
+      transition: all 0.4s;
+      box-shadow: 0 0 20px #ffd70080;
+    }
+    .btn:hover { transform: scale(1.1); box-shadow: 0 0 40px #ff4500; color: white; }
+    .btn-key { background: linear-gradient(45deg, #00ffff, #00bfff); }
+    footer {
+      margin-top: 50px;
+      font-size: 0.9rem;
+      color: #888;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
+  <div class="container animate__animated animate__fadeIn">
+    <h1 class="animate__animated animate__pulse animate__infinite">SAMIRXXX</h1>
+    <h2>Settings Panel</h2>
+    <p>Sistema Personal de Configuración Épica</p>
 
-  <!-- LOGIN -->
-  <div class="login-container" id="loginBox">
-    <h1>SAMIRXXX</h1>
-    <p>Settings Panel</p>
+    <div class="lang">
+      <a href="#">Español</a> | <a href="#">English</a>
+    </div>
 
-    <input type="text" id="user" placeholder="Usuario">
-    <input type="password" id="pass" placeholder="Contraseña">
+    <a href="https://wa.me/526121234567?text=Hola%20quiero%20mi%20contraseña%20secreta%20Samirxxx" class="btn btn-key">
+      <i class="fa-solid fa-key"></i> OBTENER CONTRASEÑA
+    </a>
 
-    <button onclick="login()">Entrar</button>
-    <p class="error" id="error"></p>
+    <a href="#" class="btn" id="entrar">ENTRAR</a>
+
+    <div id="secret" style="display:none; margin-top:30px; color:#00ff9d;">
+      <h3>¡Bienvenido al reino de Samirxxx! 🔥</h3>
+      <p>Modo dios activado. Vibra máxima. 😈</p>
+    </div>
   </div>
 
-  <!-- CONTENIDO PRINCIPAL (OCULTO) -->
-  <div class="content" id="content" style="display:none;">
-    <h1>Bienvenido, Samirxxx</h1>
-    <p>Created by Samirxxx</p>
-  </div>
+  <footer>
+    © SAMIRXXX CORPORATION<br>
+    Hecho con 🔥 en La Paz BCS<br>
+    Versión 1.0 | Encriptación legendaria
+  </footer>
 
   <script>
-    function login() {
-      const user = document.getElementById("user").value;
-      const pass = document.getElementById("pass").value;
-      const error = document.getElementById("error");
-
-      if (user === "samirxxx" && pass === "1234") {
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("content").style.display = "block";
-      } else {
-        error.textContent = "Usuario o contraseña incorrectos";
-      }
-    }
+    document.getElementById('entrar').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('secret').style.display = 'block';
+      this.textContent = '¡Ya entraste! 🚀';
+      this.style.background = 'linear-gradient(45deg, #00ff9d, #00bfff)';
+    });
   </script>
-
 </body>
 </html>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
