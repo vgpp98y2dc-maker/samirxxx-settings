@@ -1,52 +1,136 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>MODIFAXFF – Login</title>
-  <link rel="stylesheet" href="styles.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Samirxxx Panel</title>
+
+<style>
+body{
+  background:black;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial;
+  color:white;
+}
+
+.panel{
+  background:#15151f;
+  width:360px;
+  padding:22px;
+  border-radius:20px;
+  box-shadow:0 0 35px #b100ff;
+}
+
+h2{
+  text-align:center;
+  color:#b100ff;
+  margin-bottom:20px;
+}
+
+.option{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:14px 0;
+}
+
+.toggle{
+  width:26px;
+  height:26px;
+  border-radius:6px;
+  border:2px solid #666;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+}
+
+.toggle.active{
+  background:#b100ff;
+  border-color:#b100ff;
+}
+
+.toggle span{
+  display:none;
+}
+
+.toggle.active span{
+  display:block;
+}
+
+input[type=range]{
+  width:100%;
+  margin-top:8px;
+}
+
+button{
+  width:100%;
+  margin-top:18px;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(90deg,#8e2de2,#b100ff);
+  color:white;
+  font-size:16px;
+}
+
+.footer{
+  text-align:center;
+  margin-top:14px;
+  font-size:12px;
+  color:#aaa;
+}
+</style>
 </head>
+
 <body>
 
-  <div class="container">
-    <div class="card">
+<div class="panel">
+  <h2>Samirxxx</h2>
 
-      <h1>MODIFAXFF</h1>
-      <p class="subtitle">CustomWorks<br>
-        <span>Sistema Integral de Gestión Corporativa</span>
-      </p>
-
-      <div class="languages">
-        <button class="active">🌐 Español</button>
-        <button>🌐 English</button>
-        <button>🌐 Português</button>
-      </div>
-
-      <form>
-        <label>Tu Nombre</label>
-        <input type="text" placeholder="Ingresa tu nombre">
-
-        <label>Contraseña</label>
-        <input type="password" placeholder="Ingresa tu contraseña">
-
-        <button type="button" class="key-btn">🔑 OBTENER CONTRASEÑA</button>
-        <button type="submit" class="login-btn">→ ENTRAR</button>
-      </form>
-
-      <div class="social">
-        <span>Instagram</span>
-        <span>WhatsApp</span>
-        <span>TikTok</span>
-      </div>
-
-      <footer>
-        © MODIFAXFF CORPORATION<br>
-        Diseñado y desarrollado por Vellkäll Technologies<br>
-        Versión 2.4.1 | Build 2024.1
-      </footer>
-
-    </div>
+  <div class="option">
+    <span>Ativar Aimbot</span>
+    <div class="toggle" onclick="toggle(this)"><span>✓</span></div>
   </div>
+
+  <div class="option">
+    <span>No Recoil</span>
+    <div class="toggle" onclick="toggle(this)"><span>✓</span></div>
+  </div>
+
+  <div class="option">
+    <span>Aumentar precisão</span>
+    <div class="toggle" onclick="toggle(this)"><span>✓</span></div>
+  </div>
+
+  <div class="option">
+    <span>FOV</span>
+  </div>
+
+  <input type="range" min="0" max="180" value="105"
+    oninput="fov.innerText=this.value">
+
+  <p>FOV: <span id="fov">105</span></p>
+
+  <button onclick="openFF()">INJETAR</button>
+
+  <div class="footer">
+    CRACKED BY <b>@Samirxxx</b>
+  </div>
+</div>
+
+<script>
+function toggle(el){
+  el.classList.toggle("active");
+}
+
+function openFF(){
+  // Intentar abrir Free Fire directamente
+  window.location.href = "freefire://";
+}
+</script>
 
 </body>
 </html>
