@@ -1,578 +1,144 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}/* ===== ANIMACIONES FORZADAS ===== */
-
-/* LOGIN ENTRA DESDE ABAJO */
-.login-container {
-  animation: loginForce 1s ease-out !important;
-}
-
-@keyframes loginForce {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -30%) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
-
-/* HERO ENTRA */
-.hero {
-  animation: heroForce 1s ease-out !important;
-}
-
-@keyframes heroForce {
-  from {
-    opacity: 0;
-    transform: translateY(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* CARDS ENTRA */
-.card {
-  animation: cardForce 0.8s ease-out !important;
-}
-
-@keyframes cardForce {
-  from {
-    opacity: 0;
-    transform: translateY(40px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* HOVER MUY NOTORIO */
-.card:hover {
-  transform: translateY(-12px) scale(1.08) !important;
-  box-shadow: 0 15px 40px rgba(255,255,255,0.25) !important;
-}
-
-body {
-  background-color: #050505;
-  color: #ffffff;
-}
-
-/* HEADER */
-.top {
-  padding: 20px 40px;
-  border-bottom: 1px solid #1a1a1a;
-}
-
-.top h1 {
-  letter-spacing: 5px;
-  font-size: 1.1rem;
-}
-
-/* HERO */
-.hero {
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.hero h2 {
-  font-size: 4rem;
-  letter-spacing: 6px;
-}
-
-.hero p {
-  margin: 20px 0;
-  color: #aaa;
-  font-size: 1.1rem;
-}
-
-.btn {
-  padding: 14px 36px;
-  background: white;
-  color: black;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 8px;
-  transition: 0.3s;
-}
-
-.btn:hover {
-  background: #ddd;
-}
-
-/* SETTINGS */
-.settings {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  padding: 100px 20px;
-  flex-wrap: wrap;
-}
-
-.box {
-  background: #0e0e0e;
-  border: 1px solid #1f1f1f;
-  width: 260px;
-  padding: 40px 25px;
-  text-align: center;
-  border-radius: 12px;
-  transition: 0.3s;
-}
-
-.box:hover {
-  transform: translateY(-10px);
-  border-color: white;
-}
-
-.box h3 {
-  margin-bottom: 15px;
-  letter-spacing: 2px;
-}
-
-/* FOOTER */
-footer {
-  padding: 30px;
-  text-align: center;
-  color: #666;
-  border-top: 1px solid #1a1a1a;
-}* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-body {
-  background-color: #050505;
-  color: #ffffff;
-}
-
-/* HEADER */
-.top {
-  padding: 20px 40px;
-  border-bottom: 1px solid #1a1a1a;
-}
-
-.top h1 {
-  letter-spacing: 5px;
-  font-size: 1.1rem;
-}
-
-/* HERO */
-.hero {
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.hero h2 {
-  font-size: 4rem;
-  letter-spacing: 6px;
-}
-
-.hero p {
-  margin: 20px 0;
-  color: #aaa;
-  font-size: 1.1rem;
-}
-
-.btn {
-  padding: 14px 36px;
-  background: white;
-  color: black;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 8px;
-  transition: 0.3s;
-}
-
-.btn:hover {
-  background: #ddd;
-}
-
-/* SETTINGS */
-.settings {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  padding: 100px 20px;
-  flex-wrap: wrap;
-}
-
-.box {
-  background: #0e0e0e;
-  border: 1px solid #1f1f1f;
-  width: 260px;
-  padding: 40px 25px;
-  text-align: center;
-  border-radius: 12px;
-  transition: 0.3s;
-}
-
-.box:hover {
-  transform: translateY(-10px);
-  border-color: white;
-}
-
-.box h3 {
-  margin-bottom: 15px;
-  letter-spacing: 2px;
-}
-
-/* FOOTER */
-footer {
-  padding: 30px;
-  text-align: center;
-  color: #666;
-  border-top: 1px solid #1a1a1a;
-}/* ===== LOGIN CENTRADO ===== */
-body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: radial-gradient(circle at top, #111 0%, #000 60%);
-  color: white;
-  min-height: 100vh;
-}
-
-.login-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 360px;
-  background: rgba(20, 20, 20, 0.85);
-  border-radius: 14px;
-  padding: 30px;
-  text-align: center;
-  box-shadow: 0 0 25px rgba(255,255,255,0.08);
-  animation: fadeInUp 0.8s ease forwards;
-}
-
-/* TITULO */
-.login-container h1 {
-  margin: 0;
-  font-size: 32px;
-  letter-spacing: 3px;
-}
-
-/* SUBTEXTO */
-.login-container p {
-  margin-top: 6px;
-  margin-bottom: 20px;
-  opacity: 0.7;
-  font-size: 14px;
-}
-
-/* INPUTS */
-.login-container input {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  background: #000;
-  border: 1px solid #333;
-  border-radius: 8px;
-  color: white;
-  font-size: 15px;
-  outline: none;
-}
-
-.login-container input:focus {
-  border-color: white;
-}
-
-/* BOTON */
-.login-container button {
-  width: 100%;
-  margin-top: 15px;
-  padding: 12px;
-  background: white;
-  color: black;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 15px;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.login-container button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(255,255,255,0.3);
-}
-
-/* ERROR */
-.error {
-  color: #ff4d4d;
-  font-size: 13px;
-  margin-top: 10px;
-}
-
-/* ANIMACION */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -40%);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-}
-
-/* CONTENIDO DESPUES DEL LOGIN */
-.content {
-  text-align: center;
-  padding: 40px;
-  animation: fadeIn 0.8s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}/* ===== ANIMACIONES PRO ===== */
-
-/* Entrada general */
-body {
-  animation: pageFade 0.8s ease;
-}
-
-@keyframes pageFade {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* LOGIN flotante */
-.login-container {
-  animation: floatIn 1s ease;
-}
-
-@keyframes floatIn {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -60%);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-}
-
-/* Botón glow */
-.login-container button {
-  position: relative;
-  overflow: hidden;
-}
-
-.login-container button::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.4), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.login-container button:hover::after {
-  opacity: 1;
-}
-
-/* HERO animado */
-.hero {
-  animation: slideDown 1s ease;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* CARDS animadas */
-.card {
-  animation: cardUp 0.8s ease;
-}
-
-@keyframes cardUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* Hover pro */
-.card:hover {
-  box-shadow: 0 10px 30px rgba(255,255,255,0.15);
-  transform: translateY(-8px) scale(1.03);
-}
-
-/* Texto glow */
-.hero h1 {
-  text-shadow: 0 0 15px rgba(255,255,255,0.3);
-}
-
-/* Fade cuando entras */
-.content {
-  animation: fadeContent 1s ease;
-}
-
-@keyframes fadeContent {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}/* ===== ANIMACIONES PRO ===== */
-
-/* Entrada general */
-body {
-  animation: pageFade 0.8s ease;
-}
-
-@keyframes pageFade {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* LOGIN flotante */
-.login-container {
-  animation: floatIn 1s ease;
-}
-
-@keyframes floatIn {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -60%);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-}
-
-/* Botón glow */
-.login-container button {
-  position: relative;
-  overflow: hidden;
-}
-
-.login-container button::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.4), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.login-container button:hover::after {
-  opacity: 1;
-}
-
-/* HERO animado */
-.hero {
-  animation: slideDown 1s ease;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* CARDS animadas */
-.card {
-  animation: cardUp 0.8s ease;
-}
-
-@keyframes cardUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* Hover pro */
-.card:hover {
-  box-shadow: 0 10px 30px rgba(255,255,255,0.15);
-  transform: translateY(-8px) scale(1.03);
-}
-
-/* Texto glow */
-.hero h1 {
-  text-shadow: 0 0 15px rgba(255,255,255,0.3);
-}
-
-/* Fade cuando entras */
-.content {
-  animation: fadeContent 1s ease;
-}
-
-@keyframes fadeContent {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg, #0f001a, #1a0033, #0a001f); /* dark purple-black cyber */
-  background-size: 400% 400%;
-  animation: gradientBreathe 18s ease infinite;
-  overflow: hidden;
-  font-family: 'Segoe UI', system-ui, sans-serif;
-  color: #e0e0ff;
-}
-
-@keyframes gradientBreathe {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Partículas sutiles pro (ligeras, no JS) – opcional pero épico */
-.particles {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="1" fill="rgba(0,255,204,0.4)"/></svg>') repeat;
-  opacity: 0.15;
-  animation: floatParticles 60s linear infinite;
-}
-
-@keyframes floatParticles {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(-100px, -100px); }
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Samirxxx Panel</title>
+
+<style>
+body{
+  background:black;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial;
+  color:white;
+}
+
+.panel{
+  background:#15151f;
+  width:360px;
+  padding:22px;
+  border-radius:20px;
+  box-shadow:0 0 35px #b100ff;
+}
+
+h2{
+  text-align:center;
+  color:#b100ff;
+  margin-bottom:20px;
+}
+
+/* ====== OPCIONES ====== */
+.option{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:14px 0;
+}
+
+/* Toggle estilo app */
+.toggle{
+  width:26px;
+  height:26px;
+  border-radius:6px;
+  border:2px solid #666;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.toggle.active{
+  background:#b100ff;
+  border-color:#b100ff;
+}
+
+.toggle span{
+  display:none;
+  color:white;
+  font-size:16px;
+}
+
+.toggle.active span{
+  display:block;
+}
+
+/* Slider */
+input[type=range]{
+  width:100%;
+  margin-top:8px;
+}
+
+/* Botón */
+button{
+  width:100%;
+  margin-top:18px;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(90deg,#8e2de2,#b100ff);
+  color:white;
+  font-size:16px;
+}
+
+.footer{
+  text-align:center;
+  margin-top:14px;
+  font-size:12px;
+  color:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<div class="panel">
+  <h2>Samirxxx</h2>
+
+  <div class="option">
+    <span>Ativar Aimbot</span>
+    <div class="toggle" onclick="toggle(this)">
+      <span>✓</span>
+    </div>
+  </div>
+
+  <div class="option">
+    <span>No Recoil</span>
+    <div class="toggle" onclick="toggle(this)">
+      <span>✓</span>
+    </div>
+  </div>
+
+  <div class="option">
+    <span>Aumentar precisão</span>
+    <div class="toggle" onclick="toggle(this)">
+      <span>✓</span>
+    </div>
+  </div>
+
+  <div class="option">
+    <span>FOV</span>
+  </div>
+
+  <input type="range" min="0" max="180" value="105"
+    oninput="fov.innerText=this.value">
+
+  <p>FOV: <span id="fov">105</span></p>
+
+  <button onclick="alert('Activado (solo visual)')">INJETAR</button>
+
+  <div class="footer">
+    CRACKED BY <b>@Samirxxx</b>
+  </div>
+</div>
+
+<script>
+function toggle(el){
+  el.classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
