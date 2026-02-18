@@ -1,82 +1,212 @@
--- Servicios necesarios
+loadstring([[
+-- HUB SAMIRXXX PARA DELTA EXECUTOR
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
 local LocalPlayer = Players.LocalPlayer
 
--- Crear marco del hub
+-- FORZAR CREACIÓN DE LA GUI
+repeat task.wait() until LocalPlayer.PlayerGui
 local hub = Instance.new("Frame")
-hub.Name = "ModernHub"
-hub.Size = UDim2.new(0, 200, 0, 150)
-hub.Position = UDim2.new(0.5, -100, 0.5, -75)
-hub.BackgroundColor3 = Color3.new(1,1,1)
-hub.BackgroundTransparency = 0.5
+hub.Name = "Samirxxx_Hub"
+hub.Size = UDim2.new(0, 220, 0, 220)
+hub.Position = UDim2.new(0.8, -10, 0.5, -110)
+hub.BackgroundColor3 = Color3.new(0.05, 0.05, 0.05)
+hub.BackgroundTransparency = 0.1
 hub.BorderSizePixel = 0
 hub.Parent = LocalPlayer.PlayerGui
+hub.Visible = true
 
--- Sistema de arrastre optimizado
-local dragging, startPos, hubStartPos = false, Vector2.new(), UDim2.new()
-hub.InputBegan:Connect(function(input, gp)
-    if not gp and input.UserInputType == Enum.UserInputType.MouseButton1 then
-        dragging = true
-        startPos = input.Position
-        hubStartPos = hub.Position
-    end
+-- ESTILO
+local borde = Instance.new("UICorner", hub)
+borde.CornerRadius = UDim.new(0, 8)
+local stroke = Instance.new("UIStroke", hub)
+stroke.Color = Color3.new(1, 0.8, 0)
+stroke.Thickness = 1
+
+-- TÍTULO
+local titulo = Instance.new("TextLabel", hub)
+titulo.Size = UDim2.new(1, 0, 0, 25)
+titulo.Text = "Samirxxx"
+titulo.TextColor3 = Color3.new(1, 0.8, 0)
+titulo.BackgroundColor3 = Color3.new(0.03, 0.03, 0.03)
+
+-- BOTÓN MINIMIZAR
+local btnMin = Instance.new("TextButton", hub)
+btnMin.Size = UDim2.new(0, 25, 0, 25)
+btnMin.Position = UDim2.new(1, -25, 0, 0)
+btnMin.Text = "<"
+btnMin.TextColor3 = Color3.new(1,1,1)
+btnMin.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+
+local minimi = false
+btnMin.MouseButton1Click:Connect(function()
+    minimi = not minimi
+    hub.Size = minimi and UDim2.new(0, 60, 0, 25) or UDim2.new(0, 220, 0, 220)
 end)
 
-UserInputService.InputEnded:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then dragging = false end
-end)
+-- PESTAÑAS
+local contPest = Instance.new("Frame", hub)
+contPest.Size = UDim2.new(1, 0, 0, 25)
+contPest.Position = UDim2.new(0, 0, 0, 25)
+contPest.BackgroundColor3 = Color3.new(0.03, 0.03, 0.03)
 
-UserInputService.InputChanged:Connect(function(input)
-    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-        local delta = input.Position - startPos
-        hub.Position = UDim2.new(hubStartPos.X.Scale, hubStartPos.X.Offset + delta.X, hubStartPos.Y.Scale, hubStartPos.Y.Offset + delta.Y)
-    end
-end)
+local contOpc = Instance.new("Frame", hub)
+contOpc.Size = UDim2.new(1, 0, 1, -50)
+contOpc.Position = UDim2.new(0, 0, 0, 50)
+contOpc.BackgroundTransparency = 1
 
--- Función compacta para crear botones
-local function crearBoton(parent, texto, posY)
-    local btn = Instance.new("TextButton")
-    btn.Size = UDim2.new(1, 0, 0.33, 0)
-    btn.Position = UDim2.new(0, 0, posY, 0)
-    btn.Text = texto
-    btn.BackgroundColor3 = Color3.new(0.4, 0.6, 1)
-    btn.BorderSizePixel = 0
-    btn.Parent = parent
-    return btn
+-- DATOS
+local datos = {
+    ["Com"] = {{n="AIMBOT",t="num",v=25},{n="SPIN BOT",t="num",v=1},{n="AUTO BAT",t="num",v=0.15},{n="AUTO STEAL",t="num",v=35}},
+    ["Mov"] = {{n="SPEED BOOST",t="chk",v=28,a=true},{n="INFINITE JUMP",t="chk",v=50,a=true},{n="ANTI KNOCKBACK",t="chk",a=true},{n="SUPER JUMP",t="chk",v=10,a=true}},
+    ["Uti"] = {{n="FPS BOOST",t="chk",a=false},{n="XRAY BASE",t="chk",a=false},{n="ESP HIGHLIGHT",t="chk",a=true},{n="AUTO SHIFT LOCK",t="chk",a=false}},
+    ["Key"] = {{n="Aimbot",t="key",k="Q"},{n="Anti-Knockback",t="key",k="R"},{n="Anti-Ragdoll",t="key",k="T"}}
+}
+local act = "Com"
+
+-- FUNCIÓN CREAR PESTAÑA
+local function crearPest(nom, x)
+    local b = Instance.new("TextButton", contPest)
+    b.Name = nom
+    b.Size = UDim2.new(0, 55, 0, 25)
+    b.Position = UDim2.new(0, x, 0, 0)
+    b.Text = nom
+    b.TextColor3 = nom==act and Color3.new(1,0.8,0) or Color3.new(0.8,0.8,0.8)
+    b.BackgroundColor3 = nom==act and Color3.new(0.08,0.08,0.08) or Color3.new(0.03,0.03,0.03)
+    
+    b.MouseButton1Click:Connect(function()
+        act = nom
+        for _,p in pairs(contPest:GetChildren()) do
+            if p:IsA("TextButton") then
+                p.TextColor3 = p.Name==act and Color3.new(1,0.8,0) or Color3.new(0.8,0.8,0.8)
+                p.BackgroundColor3 = p.Name==act and Color3.new(0.08,0.08,0.08) or Color3.new(0.03,0.03,0.03)
+            end
+        end
+        for _,o in pairs(contOpc:GetChildren()) do o:Destroy() end
+        mostrarOpc()
+    end)
 end
 
--- Infinite Jump (funcionalidad básica)
-local saltarInfinito = false
-local btnSaltar = crearBoton(hub, "Infinite Jump: OFF", 0)
-btnSaltar.MouseButton1Click:Connect(function()
-    saltarInfinito = not saltarInfinito
-    btnSaltar.Text = "Infinite Jump: " .. (saltarInfinito and "ON" or "OFF")
-    -- Lógica básica si es para tu juego (ejemplo)
-    if LocalPlayer.Character then
-        local humanoide = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-        if humanoide then humanoide.JumpPower = saltarInfinito and 50 or 50 end -- Ajusta según necesites
-    end
-end)
+-- FUNCIÓN CREAR OPCIÓN
+local function crearOpc(op, y)
+    local c = Instance.new("Frame", contOpc)
+    c.Size = UDim2.new(1,0,0,30)
+    c.Position = UDim2.new(0,0,0,y)
+    c.BackgroundTransparency = 1
 
--- Auto Steal (marcador para desarrollar)
-local robarAuto = false
-local btnRobar = crearBoton(hub, "Auto Steal: OFF", 0.66)
-btnRobar.MouseButton1Click:Connect(function()
-    robarAuto = not robarAuto
-    btnRobar.Text = "Auto Steal: " .. (robarAuto and "ON" or "OFF")
-    -- Aquí agregarías la lógica específica de tu juego
-end)
+    local l = Instance.new("TextLabel", c)
+    l.Size = UDim2.new(0.6,0,1,0)
+    l.Position = UDim2.new(0,5,0,0)
+    l.Text = op.n
+    l.TextColor3 = Color3.new(1,1,1)
+    l.BackgroundTransparency = 1
 
--- Aimbot bate (reemplazado por código claro en lugar de ofuscado)
-local aimbotActivo = false
-local btnAimbot = crearBoton(hub, "Aimbot Bate: OFF", 0.33) -- Agregado en el espacio vacío
-btnAimbot.MouseButton1Click:Connect(function()
-    aimbotActivo = not aimbotActivo
-    btnAimbot.Text = "Aimbot Bate: " .. (aimbotActivo and "ON" or "OFF")
-    -- Lógica básica de aimbot (ejemplo para juego propio)
-    if aimbotActivo then
-        -- Aquí iría el código para detectar objetivos y ajustar la vista
-        print("Aimbot activado - agrega lógica específica aquí")
+    if op.t=="num" then
+        local i = Instance.new("TextBox", c)
+        i.Size = UDim2.new(0.3,0,0.8,0)
+        i.Position = UDim2.new(0.7,0,0.1,0)
+        i.Text = op.v
+        i.TextColor3 = Color3.new(1,1,1)
+        i.BackgroundColor3 = Color3.new(0.15,0.15,0.15)
+    elseif op.t=="chk" then
+        local ch = Instance.new("TextButton", c)
+        ch.Size = UDim2.new(0,20,0,20)
+        ch.Position = UDim2.new(0.7,0,0.15,0)
+        ch.Text = op.a and "✔" or ""
+        ch.TextColor3 = Color3.new(1,0.8,0)
+        ch.BackgroundColor3 = Color3.new(0.15,0.15,0.15)
+
+        ch.MouseButton1Click:Connect(function()
+            op.a = not op.a
+            ch.Text = op.a and "✔" or ""
+        end)
+
+        if op.v then
+            local vl = Instance.new("TextLabel", c)
+            vl.Size = UDim2.new(0.2,0,0.8,0)
+            vl.Position = UDim2.new(0.8,0,0.1,0)
+            vl.Text = op.v
+            vl.TextColor3 = Color3.new(1,1,1)
+            vl.BackgroundTransparency = 1
+        end
+    elseif op.t=="key" then
+        local kl = Instance.new("TextLabel", c)
+        kl.Size = UDim2.new(0.15,0,1,0)
+        kl.Position = UDim2.new(0.7,0,0,0)
+        kl.Text = op.k
+        kl.TextColor3 = Color3.new(1,0.8,0)
+        kl.BackgroundTransparency = 1
     end
-end)
+end
+
+-- FUNCIÓN MOSTRAR OPCIONES
+local function mostrarOpc()
+    if act=="Key" then
+        local d = Instance.new("TextButton", contOpc)
+        d.Size = UDim2.new(0.4,0,0,25)
+        d.Position = UDim2.new(0,5,0,0)
+        d.Text = "disable all"
+        d.TextColor3 = Color3.new(1,0.8,0)
+        d.BackgroundColor3 = Color3.new(0.15,0.15,0.15)
+
+        local g = Instance.new("TextButton", contOpc)
+        g.Size = UDim2.new(0.4,0,0,25)
+        g.Position = UDim2.new(0.55,0,0,0)
+        g.Text = "GUARDAR"
+        g.TextColor3 = Color3.new(1,0.8,0)
+        g.BackgroundColor3 = Color3.new(0.15,0.15,0.15)
+    end
+
+    local y = act=="Key" and 30 or 0
+    for i,op in ipairs(datos[act]) do
+        crearOpc({n=op.n,t=op.t,v=op.v,a=op.a,k=op.k}, y+(i-1)*30)
+    end
+end
+
+-- CREAR PESTAÑAS
+crearPest("Com",0)
+crearPest("Mov",55)
+crearPest("Uti",110)
+crearPest("Key",165)
+mostrarOpc()
+
+-- LÓGICA FUNCIONAL
+local function vel()
+    if not LocalPlayer.Character then return end
+    local h = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+    if h then h.WalkSpeed = datos[act][1].a and datos[act][1].v or 16 end
+end
+LocalPlayer.CharacterAdded:Connect(vel)
+vel()
+
+local function saltoInf()
+    if not LocalPlayer.Character then return end
+    local h = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+    if h then
+        h:GetPropertyChangedSignal("Jump"):Connect(function()
+            if datos[act][2].a and h:GetState()==Enum.HumanoidStateType.Freefall then
+                h:ChangeState(Enum.HumanoidStateType.Jumping)
+            end
+        end)
+    end
+end
+LocalPlayer.CharacterAdded:Connect(saltoInf)
+saltoInf()
+
+local function esp()
+    if not datos[act][3].a then return end
+    for _,p in pairs(Players:GetPlayers()) do
+        if p~=LocalPlayer and p.Character then
+            local t = p.Character:FindFirstChild("Torso") or p.Character:FindFirstChild("UpperTorso")
+            if t then
+                local h = t:FindFirstChild("ESP") or Instance.new("Highlight", t)
+                h.Name = "ESP"
+                h.Adornee = t
+                h.FillColor = Color3.new(1,0.8,0)
+            end
+        end
+    end
+end
+RunService.RenderStepped:Connect(esp)
+]])()
