@@ -1,144 +1,82 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Samirxxx Panel</title>
+-- Servicios necesarios
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local LocalPlayer = Players.LocalPlayer
 
-<style>
-body{
-  background:black;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-family:Arial;
-  color:white;
-}
+-- Crear marco del hub
+local hub = Instance.new("Frame")
+hub.Name = "ModernHub"
+hub.Size = UDim2.new(0, 200, 0, 150)
+hub.Position = UDim2.new(0.5, -100, 0.5, -75)
+hub.BackgroundColor3 = Color3.new(1,1,1)
+hub.BackgroundTransparency = 0.5
+hub.BorderSizePixel = 0
+hub.Parent = LocalPlayer.PlayerGui
 
-.panel{
-  background:#15151f;
-  width:360px;
-  padding:22px;
-  border-radius:20px;
-  box-shadow:0 0 35px #b100ff;
-}
+-- Sistema de arrastre optimizado
+local dragging, startPos, hubStartPos = false, Vector2.new(), UDim2.new()
+hub.InputBegan:Connect(function(input, gp)
+    if not gp and input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        startPos = input.Position
+        hubStartPos = hub.Position
+    end
+end)
 
-h2{
-  text-align:center;
-  color:#b100ff;
-  margin-bottom:20px;
-}
+UserInputService.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then dragging = false end
+end)
 
-/* ====== OPCIONES ====== */
-.option{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:14px 0;
-}
+UserInputService.InputChanged:Connect(function(input)
+    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = input.Position - startPos
+        hub.Position = UDim2.new(hubStartPos.X.Scale, hubStartPos.X.Offset + delta.X, hubStartPos.Y.Scale, hubStartPos.Y.Offset + delta.Y)
+    end
+end)
 
-/* Toggle estilo app */
-.toggle{
-  width:26px;
-  height:26px;
-  border-radius:6px;
-  border:2px solid #666;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  cursor:pointer;
-  transition:0.2s;
-}
+-- Función compacta para crear botones
+local function crearBoton(parent, texto, posY)
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(1, 0, 0.33, 0)
+    btn.Position = UDim2.new(0, 0, posY, 0)
+    btn.Text = texto
+    btn.BackgroundColor3 = Color3.new(0.4, 0.6, 1)
+    btn.BorderSizePixel = 0
+    btn.Parent = parent
+    return btn
+end
 
-.toggle.active{
-  background:#b100ff;
-  border-color:#b100ff;
-}
+-- Infinite Jump (funcionalidad básica)
+local saltarInfinito = false
+local btnSaltar = crearBoton(hub, "Infinite Jump: OFF", 0)
+btnSaltar.MouseButton1Click:Connect(function()
+    saltarInfinito = not saltarInfinito
+    btnSaltar.Text = "Infinite Jump: " .. (saltarInfinito and "ON" or "OFF")
+    -- Lógica básica si es para tu juego (ejemplo)
+    if LocalPlayer.Character then
+        local humanoide = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+        if humanoide then humanoide.JumpPower = saltarInfinito and 50 or 50 end -- Ajusta según necesites
+    end
+end)
 
-.toggle span{
-  display:none;
-  color:white;
-  font-size:16px;
-}
+-- Auto Steal (marcador para desarrollar)
+local robarAuto = false
+local btnRobar = crearBoton(hub, "Auto Steal: OFF", 0.66)
+btnRobar.MouseButton1Click:Connect(function()
+    robarAuto = not robarAuto
+    btnRobar.Text = "Auto Steal: " .. (robarAuto and "ON" or "OFF")
+    -- Aquí agregarías la lógica específica de tu juego
+end)
 
-.toggle.active span{
-  display:block;
-}
-
-/* Slider */
-input[type=range]{
-  width:100%;
-  margin-top:8px;
-}
-
-/* Botón */
-button{
-  width:100%;
-  margin-top:18px;
-  padding:14px;
-  border:none;
-  border-radius:14px;
-  background:linear-gradient(90deg,#8e2de2,#b100ff);
-  color:white;
-  font-size:16px;
-}
-
-.footer{
-  text-align:center;
-  margin-top:14px;
-  font-size:12px;
-  color:#aaa;
-}
-</style>
-</head>
-
-<body>
-
-<div class="panel">
-  <h2>Samirxxx</h2>
-
-  <div class="option">
-    <span>Ativar Aimbot</span>
-    <div class="toggle" onclick="toggle(this)">
-      <span>✓</span>
-    </div>
-  </div>
-
-  <div class="option">
-    <span>No Recoil</span>
-    <div class="toggle" onclick="toggle(this)">
-      <span>✓</span>
-    </div>
-  </div>
-
-  <div class="option">
-    <span>Aumentar precisão</span>
-    <div class="toggle" onclick="toggle(this)">
-      <span>✓</span>
-    </div>
-  </div>
-
-  <div class="option">
-    <span>FOV</span>
-  </div>
-
-  <input type="range" min="0" max="180" value="105"
-    oninput="fov.innerText=this.value">
-
-  <p>FOV: <span id="fov">105</span></p>
-
-  <button onclick="alert('Activado (solo visual)')">INJETAR</button>
-
-  <div class="footer">
-    CRACKED BY <b>@Samirxxx</b>
-  </div>
-</div>
-
-<script>
-function toggle(el){
-  el.classList.toggle("active");
-}
-</script>
-
-</body>
-</html>
+-- Aimbot bate (reemplazado por código claro en lugar de ofuscado)
+local aimbotActivo = false
+local btnAimbot = crearBoton(hub, "Aimbot Bate: OFF", 0.33) -- Agregado en el espacio vacío
+btnAimbot.MouseButton1Click:Connect(function()
+    aimbotActivo = not aimbotActivo
+    btnAimbot.Text = "Aimbot Bate: " .. (aimbotActivo and "ON" or "OFF")
+    -- Lógica básica de aimbot (ejemplo para juego propio)
+    if aimbotActivo then
+        -- Aquí iría el código para detectar objetivos y ajustar la vista
+        print("Aimbot activado - agrega lógica específica aquí")
+    end
+end)
