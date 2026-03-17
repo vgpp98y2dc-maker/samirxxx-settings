@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Samirxx - Próximamente</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+body { margin:0; font-family:'Inter',sans-serif; background:#000; color:white; overflow:hidden;}
+canvas { position:fixed; top:0; left:0; z-index:0; pointer-events:none;}
+.container { width:95%; max-width:500px; margin:auto; padding:40px 0; text-align:center; position:relative; z-index:1; display:flex; flex-direction:column; justify-content:space-between; min-height:100vh;}
+h1 { color:#3399ff; text-shadow:0 0 20px #3399ff,0 0 40px #66ccff; margin-top:50px;}
+p { color:#88cfff; font-size:clamp(16px,4vw,22px);}
+#comingSoon { font-size:24px; color:#ff4444; text-shadow:0 0 15px #ff5555,0 0 30px #ff2222; margin-top:50px;}
+.link { display:block; background:linear-gradient(145deg,#3399ff,#0066ff); padding:18px; margin:20px 0; border-radius:16px; text-decoration:none; color:white; font-size:clamp(16px,4vw,20px);}
+.link:hover { transform:scale(1.08); box-shadow:0 0 40px #66ccff,0 0 70px #3399ff;}
+</style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<div class="container">
+  <div>
+    <h1>¡Bienvenido a la Zona Pro!</h1>
+    <p>Aquí podrás explorar contenido exclusivo, noticias o novedades.</p>
+  </div>
+  <div id="comingSoon">PRÓXIMAMENTE</div>
+  <a class="link" href="index.html">⬅️ Regresar</a>
+</div>
+
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+function resizeCanvas(){canvas.width=window.innerWidth; canvas.height=window.innerHeight;}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+const particles = [];
+for(let i=0;i<200;i++){
+  particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*3+1,dx:(Math.random()-0.5)*1,dy:Math.random()*2+1});
+}
+let mouse={x:canvas.width/2, y:canvas.height/2};
+window.addEventListener('mousemove', e=>{mouse.x=e.clientX; mouse.y=e.clientY;});
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    let dx = mouse.x - p.x;
+    let dy = mouse.y - p.y;
+    p.x += p.dx + dx*0.001;
+    p.y += p.dy + dy*0.001;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle = 'rgba(50,150,255,0.8)';
+    ctx.fill();
+    if(p.y>canvas.height)p.y=-10;
+    if(p.x>canvas.width)p.x=0;
+    if(p.x<0)p.x=canvas.width;
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Samirxx Ultra Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+body {
+  margin:0;
+  font-family: 'Inter', sans-serif;
+  background:#000;
+  color:white;
+  overflow:auto;
+}
+canvas {
+  position: fixed;
+  top:0;
+  left:0;
+  z-index:0;
+  pointer-events:none;
+}
+.container {
+  position: relative;
+  z-index:1;
+  width: 95%;
+  max-width: 500px;
+  margin:auto;
+  padding: 40px 0;
+  text-align:center;
+}
+.avatar {
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  margin-bottom:20px;
+  border:4px solid rgba(255,50,50,0.8);
+  box-shadow:0 0 50px rgba(255,50,50,1);
+}
+.avatar.small { width:120px; height:120px; }
+h1, .user2 { 
+  font-size: clamp(30px,8vw,55px); 
+  color:#ff4444; 
+  text-shadow:0 0 25px #ff4444,0 0 50px #ff2222;
+  font-weight:600;
+  margin:0;
+}
+p { font-size:clamp(16px,4vw,20px); color:#aaa; margin-bottom:30px;}
+.section {margin-top:40px;}
+.link {
+  display:block;
+  background:linear-gradient(145deg,#ff5555,#ff2222);
+  padding:18px;
+  margin:12px 0;
+  border-radius:16px;
+  text-decoration:none;
+  color:white;
+  font-size:clamp(16px,4vw,20px);
+  border:1px solid #ff4444;
+  box-shadow:0 0 15px #ff5555;
+  transition:0.3s, box-shadow 0.6s ease-in-out;
+  position:relative;
+  overflow:hidden;
+}
+.link:hover {
+  transform:scale(1.08);
+  box-shadow:0 0 40px #ff7777,0 0 70px #ff2222;
+  animation: glowPulse 1s infinite alternate;
+}
+@keyframes glowPulse {
+  0% { box-shadow:0 0 30px #ff7777,0 0 50px #ff2222; }
+  100% { box-shadow:0 0 50px #ff7777,0 0 100px #ff2222; }
+}
+.profile-box { margin-top:20px; }
+.next-button { margin-top:50px; cursor:pointer; }
+.regresar-button { margin-top:20px; cursor:pointer; }
+.footer { margin-top:40px; font-size:14px; color:#666;}
+.hidden { display:none !important; }
+.fade-in { display:block !important; opacity:1; transition: opacity 0.8s ease; }
+
+/* Página siguiente */
+#nextPage {
+  position: absolute;  /* flota sobre la primera página */
+  top:0;
+  left:0;
+  width:100%;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  z-index:2;
+  background:#000;
+  padding:40px 0;
+}
+#nextPage h1 { color:#3399ff; text-shadow:0 0 20px #3399ff,0 0 40px #66ccff; margin-top:50px; }
+#nextPage p { color:#88cfff; font-size:clamp(16px,4vw,22px);}
+#comingSoon {
+  font-size:24px;
+  color:#ff4444;
+  text-shadow:0 0 15px #ff5555,0 0 30px #ff2222;
+  margin-top:50px;
+}
+</style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<!-- CONTENIDO PRINCIPAL -->
+<div class="container" id="mainContent">
+  <img src="img/20260316205417.png" class="avatar" alt="Avatar principal">
+  <h1>Samirxx</h1>
+  <p>@samirxx</p>
+
+  <div class="section">
+    <a class="link" href="https://wa.me/526151160719?text=Hola,%20quiero%20adquirir%20un%20producto" target="_blank">📲 WhatsApp</a>
+    <a class="link" href="https://wa.me/526151160719?text=Quiero%20PROXY%20IPHONE" target="_blank">PROXY IPHONE</a>
+    <a class="link" href="https://wa.me/526151160719?text=Quiero%20AIM%20DRAG" target="_blank">AIM DRAG</a>
+    <a class="link" href="https://wa.me/526151160719?text=Quiero%20AIM%20BODY" target="_blank">AIM BODY</a>
+  </div>
+
+  <div class="section">
+    <div class="profile-box">
+      <img src="img/20260316205422.png" class="avatar small" alt="Perfil secundario">
+      <p class="user2">@47Renovado</p>
+      <a class="link" href="https://wa.me/573025434258?text=Hola,%20quiero%20adquirir%20un%20producto" target="_blank">WhatsApp</a>
+      <a class="link" href="https://wa.me/573025434258?text=Quiero%20AIMBOT%20CUELLO" target="_blank">AIMBOT CUELLO</a>
+      <a class="link" href="https://wa.me/573025434258?text=Quiero%20HOLOGRAMA" target="_blank">HOLOGRAMA</a>
+      <a class="link" href="https://wa.me/573025434258?text=Quiero%20BALAS%20MAGICAS" target="_blank">BALAS MÁGICAS</a>
+
+      <a class="link next-button" id="nextBtn">Siguiente ➡️</a>
+    </div>
+  </div>
+  <div class="footer">© 2026 Samirxx ⚡</div>
+</div>
+
+<!-- CONTENIDO SIGUIENTE -->
+<div class="container hidden" id="nextPage">
+  <div>
+    <h1>¡Bienvenido a la Zona Pro!</h1>
+    <p>Aquí podrás explorar contenido exclusivo, noticias o novedades.</p>
+  </div>
+  <div id="comingSoon">PRÓXIMAMENTE</div>
+  <a class="link regresar-button" id="backBtn">⬅️ Regresar</a>
+</div>
+
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+let color = {r:255,g:50,b:50,a:0.8};
+
+function resizeCanvas(){canvas.width=window.innerWidth; canvas.height=window.innerHeight;}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+const particles=[];
+for(let i=0;i<200;i++){
+  particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*3+1,dx:(Math.random()-0.5)*1,dy:Math.random()*2+1});
+}
+
+let mouse={x:canvas.width/2, y:canvas.height/2};
+window.addEventListener('mousemove', e=>{mouse.x=e.clientX; mouse.y=e.clientY;});
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    let dx = mouse.x - p.x;
+    let dy = mouse.y - p.y;
+    p.x += p.dx + dx*0.001;
+    p.y += p.dy + dy*0.001;
+
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${color.a})`;
+    ctx.fill();
+
+    if(p.y>canvas.height)p.y=-10;
+    if(p.x>canvas.width)p.x=0;
+    if(p.x<0)p.x=canvas.width;
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+function setColor(r,g,b,a){
+  const steps = 60;
+  const dr=(r-color.r)/steps;
+  const dg=(g-color.g)/steps;
+  const db=(b-color.b)/steps;
+  const da=(a-color.a)/steps;
+  let i=0;
+  const interval = setInterval(()=>{
+    if(i>=steps) clearInterval(interval);
+    color.r+=dr; color.g+=dg; color.b+=db; color.a+=da;
+    i++;
+  },16);
+}
+
+// Botones
+document.getElementById("nextBtn").addEventListener("click",()=>{
+  document.getElementById("mainContent").classList.add("hidden");
+  const nextPage = document.getElementById("nextPage");
+  nextPage.classList.remove("hidden");
+  nextPage.classList.add("fade-in");
+  setColor(50,150,255,0.8);
+});
+
+document.getElementById("backBtn").addEventListener("click",()=>{
+  const nextPage = document.getElementById("nextPage");
+  nextPage.classList.add("hidden");
+  nextPage.classList.remove("fade-in");
+
+  const mainContent = document.getElementById("mainContent");
+  mainContent.classList.remove("hidden");
+  mainContent.classList.add("fade-in");
+  setColor(255,50,50,0.8);
+});
+</script>
+</body>
+</html>
